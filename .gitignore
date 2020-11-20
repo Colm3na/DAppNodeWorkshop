@@ -8,6 +8,6 @@
 *.log
 *.log.*
 *.sig
-
+*.atunEnSalsaAmericana
 pkg/
 src/
