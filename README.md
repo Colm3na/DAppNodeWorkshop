@@ -1,6 +1,6 @@
 # DAppNodeWorkshop
 
-## Repositorio para el workshop de DAppNode impartido por [Wimel](https://github.com/wimel) parte de [DelegaNetworks](https://delega.io/) y [ColmenaLabs_svq](https://www.colmenalabs.org/), el workshop será para la instalación y primeros pasos con [DAppNode](https://dappnode.io/) por lo que no se necesitan conocimientos avanzados, aún así le daremos un poco de seguridad a nuestro equipo.
+## Repositorio para el workshop de DAppNode impartido por [Wimel](https://github.com/wimel) parte de [DelegaNetworks](https://delega.io/) y [ColmenaLabs_svq](https://www.colmenalabs.org/), el workshop será explicando la instalación y primeros pasos con [DAppNode](https://dappnode.io/) por lo que no se necesitan conocimientos avanzados, aún así le daremos un poco de seguridad a nuestro equipo.
 
 ### Requisitos: 
 
@@ -17,7 +17,7 @@
 apt update && apt -y upgrade && apt install -y sudo
 ```
 
-- Cambiamos el puerto para acceder por [`ssh`](https://es.wikipedia.org/wiki/Secure_Shell), editando el archivo `sshd_config`, buscamos el puerto y lo modificamos _(línea5, en mi caso uso `vim` pero podéis usar `nano` o cualquier otro editor de textos)_ vamos a usar el puerto `41930`, pero podeis usar el que mas os guste _(normalmente Ethereum usa el puerto `30303` el cual tambien se puede modificar después, pero es mejor dejar el puerto por defecto para el nodo y cambiar el de acceso por `ssh`)_:
+- Cambiamos el puerto para acceder por [`ssh`](https://es.wikipedia.org/wiki/Secure_Shell), editando el archivo `sshd_config`, buscamos el puerto y lo modificamos _(línea5, en mi caso uso `vim` pero podéis usar `nano` o cualquier otro editor de textos)_ vamos a usar el puerto `41930`, pero podeis usar el que mas os guste _(DAppNode usa el puerto `8545` el cual también se puede modificar después, pero es mejor dejar el puerto por defecto para el nodo y cambiar el de acceso por `ssh`)_:
 
 ```sh
 vim /etc/ssh/sshd_config
@@ -56,7 +56,7 @@ vim /etc/fail2ban/jail.conf
 
  `findtime = 10m` por `findtime = 5m` _(lo podemos bajar más si queremos, este valor lo que hará es banear al host si ha generado `maxretry` durante el `findtime`)_.
 
- `maxretry = 5` por `maxretry = 2` _(no bajar a menos de 2, este valor es el numero de inetntos fallidos que el host tendrá antes de ser baneado)_.
+ `maxretry = 5` por `maxretry = 2` _(no bajar a menos de 2, este valor es el numero de intentos fallidos que el host tendrá antes de ser baneado)_.
 ![](images/d4.png)
 
 > Guardamos, salimos y como antes reiniciamos el servicio para que carge la configuración nueva:
@@ -104,13 +104,13 @@ usermod -aG sudo dappnode
 
 > Tip: Si queremos que no nos pregunte la contraseña cada vez que accedemos a nuestro equipo por `ssh`, en la terminal de nuestro equipo introducimos lo siguiente _(esto es como si nuestros equipos se tomaran una cerveza juntos y se hicieran amigos, técnicamente lo que hace es copiar nuestra clave pública en la remota)_:
 ```sh
- ssh-copy-id -p41930 dappnode@IP
+ ssh-copy-id -p41930 USUARIO@IP
 ```
 ![](images/d7.png)
 
-#### Instalación de DAppNode:
+### Instalación de DAppNode:
 
-- Como la gente de DAppNode es tan way, este primer comando instala todos los requisitos, más info [aquí](https://github.com/dappnode/DAppNode/wiki/DAppNode-Installation-Guide#install-dappnode-prerequisites), _(nos saldrá un mensaje como la frase que le dice el abuelo de Peter Parker, pero realmente es una frase de Franklin D. Roosevelt el 11 de abril de 1945, dos días antes de morir en su último discurso)_, metemos la contraseña y nos instalará los requisitos:
+- Como la gente de DAppNode es tan _way_, este primer comando instala todos los requisitos, más info [aquí](https://github.com/dappnode/DAppNode/wiki/DAppNode-Installation-Guide#install-dappnode-prerequisites), _(nos saldrá un mensaje como la frase que le dice el abuelo de Peter Parker, pero realmente es una frase de Franklin D. Roosevelt el 11 de abril de 1945, dos días antes de morir en su último discurso)_, metemos la contraseña y nos instalará los requisitos:
 ```sh
 wget -qO - https://prerequisites.dappnode.io  | sudo bash
 ```
@@ -125,9 +125,11 @@ wget -qO - https://installer.dappnode.io | sudo bash
 
 - Una vez que ha terminado de instalar lo necesario nos aparece un `QR` que podremos escanear con nuestro movil, o podemos usar la `URL` que nos aparece justo debajo, si estamos en la misma red que nuestro DAppNode, debemos modificar la primera parte por la `IP` del equipo en nuestra red.
 
-> Para el uso de la `VPN` en nuestro sistema operativo en la [wiki de DAppNode](https://github.com/dappnode/DAppNode/wiki/OpenVPN-Client-Guide) podemos encontrar los pasos a seguir.
+![](images/d15.png)
 
-- Cuando hemos importado la `VPN` y una vez activda, podemos acceder a la web [http://my.dappnode](http://my.dappnode/), y nos irá guiando paso a paso con los siguientes pasos.
+> Para el uso de la `VPN` en nuestro sistema operativo en la [wiki de DAppNode](https://github.com/dappnode/DAppNode/wiki/OpenVPN-Client-Guide) podemos encontrar los pasos a seguir para cada sistema operativo.
+
+- Cuando hemos importado el perfil de la `VPN` y activada, podemos acceder a la web [http://my.dappnode](http://my.dappnode/), y nos irá guiando paso a paso.
 
 Desde ahora para instalar el nodo que queramos ya lo haremos desde la web de nuestro DAppNode [http://my.dappnode](http://my.dappnode) activando la `VPN`, a golpe de clic y sin comlicaciones, como hemos visto esta es la forma más sencilla de instalar y mantener el nodo de la red que queramos, espero que esta guía os sirva de ayuda!!. 
 
@@ -161,7 +163,7 @@ Desde ahora para instalar el nodo que queramos ya lo haremos desde la web de nue
 curl -k -X POST -H 'Content-Type: application/json' -d '{"jsonrpc":"2.0","method":"eth_chainId","id":1}' http://geth.dappnode:8545
 ```
 
-> Si tenemos nuestros nodos en la testnet en estas páginas webs podemos encontrar los valores:
+> Si tenemos nuestros nodos en la testnet en estas páginas webs podemos encontrar más información:
    - [Post en Medium](https://medium.com/@pedrouid/chainid-vs-networkid-how-do-they-differ-on-ethereum-eec2ed41635b) de [Pedro Gomes](https://medium.com/@pedrouid).
 
    - [EVM Networks](https://chainid.network/).
