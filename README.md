@@ -131,6 +131,41 @@ wget -qO - https://installer.dappnode.io | sudo bash
 
 Desde ahora para instalar el nodo que queramos ya lo haremos desde la web de nuestro DAppNode [http://my.dappnode](http://my.dappnode) activando la `VPN`, a golpe de clic y sin comlicaciones, como hemos visto esta es la forma más sencilla de instalar y mantener el nodo de la red que queramos, espero que esta guía os sirva de ayuda!!. 
 
+![](images/dapworkshop.gif)
+
+
+### Cómo usar nuestro nodo de Ethereum en Metamask:
+
+> Necesitamos tener [Metamask](https://metamask.io/) instalado _(comprobad que sea ofrecido por [https://metamask.io](https://metamask.io))_: 
+   - [Brave](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=es) 
+   - [Google Chrome](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=es)
+   - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/)
+
+- Una vez que tenemos [Metamask](https://metamask.io/) instalado en nuestro navegador y desbloqueado, hacemos clic en el desplegable que está arriba a la derecha en el que aparece `Red principal de Ethereum`.
+![](images/d11.png) 
+
+- Seleccionamos `RPC personalizado`, y nos apareceran unos valores que debemos introducir. Después hacemos clic en `Añadir Red`:
+
+   `Network Name` = Podemos usar el nombre que deseemos, para el ejemplo usaremos `DAppNode`.
+
+   `New RPC URL` = http://geth.dappnode:8545.
+
+   `Chain ID` = 0x1.
+
+   `Symbol (optional)` = ETH.
+
+![](images/dapworkshop2.gif)
+
+> Si estamos conectados usando la VPN podemos comprobar el ID usando este comando desde nuestra terminal:
+```sh
+curl -k -X POST -H 'Content-Type: application/json' -d '{"jsonrpc":"2.0","method":"eth_chainId","id":1}' http://geth.dappnode:8545
+```
+
+> Si tenemos nuestros nodos en la testnet en estas páginas webs podemos encontrar los valores:
+   - [Post en Medium](https://medium.com/@pedrouid/chainid-vs-networkid-how-do-they-differ-on-ethereum-eec2ed41635b) de [Pedro Gomes](https://medium.com/@pedrouid).
+
+   - [EVM Networks](https://chainid.network/).
+
 ##### «Enlaces de interés»
 
 [¿Qué es DappNode?(vídeo)](https://www.youtube.com/watch?v=dPoovW5tjzc)
